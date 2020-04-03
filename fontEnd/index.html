@@ -14,17 +14,21 @@
         }
         // 连接到服务器
         handleConnect(callback) {
-          this.socket = io.connect(this.URL, { reconnect: false, 'auto connect': false });
-          this.socket.on('connect', function() {
-            alert('服务器已连接');
-          });
-          this.socket.on('getMessage', function(data) {
-            // 服务端收到信息回调
-            callback(data);
-          });
-          this.socket.on('disconnect', function() {
-            alert('服务器已断开连接');
-          });
+          try {
+            this.socket = io.connect(this.URL, { reconnect: false, 'auto connect': false });
+            this.socket.on('connect', function() {
+              alert('服务器连接成功!');
+            });
+            this.socket.on('getMessage', function(data) {
+              // 服务端收到信息回调
+              callback(data);
+            });
+            this.socket.on('disconnect', function() {
+              alert('服务器已断开连接');
+            });
+          } catch (err) {
+            alert('服务器未启动');
+          }
         }
         // 断开服务器
         handleDisconnect() {
