@@ -1,10 +1,12 @@
 # webSocket
-关于webSocket的使用demo
+
+关于 webSocket 的使用 demo
 
 ## 使用方法
-1. 在backEnd文件夹中运行`yarn`，安装依赖。
-2. 在backEnd文件夹中运行`yarn server`，运行服务器。
-3. 在新窗口中打开fontEnd文件夹，用浏览器打开`index.html`页面。
+
+1. 在 backEnd 文件夹中运行`yarn`，安装依赖。
+2. 在 backEnd 文件夹中运行`yarn server`，运行服务器。
+3. 在新窗口中打开 fontEnd 文件夹，用浏览器打开`index.html`页面。
 4. 在打开的页面中先点击“连接服务器”按钮。
 5. 连接成功后，在上面的输入框中输入任意字符。
 6. 再点击”发送给服务器“按钮，即可在下面的输入框中看到服务器端的返回数据。
