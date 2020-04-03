@@ -11,7 +11,6 @@
     "bufferutil": "^4.0.1",
     "http": "^0.0.1-security",
     "koa": "^2.11.0",
-    "koa-router": "^8.0.8",
     "socket.io": "^2.3.0",
     "utf-8-validate": "^5.0.2"
   }
