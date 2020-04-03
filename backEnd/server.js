@@ -9,11 +9,8 @@ var server = require("http").createServer(app.callback());
 var io = require("socket.io")(server);
 // 建立链接
 io.on("connection", function(socket) {
-  console.log("connection: ");
   // io.emit代表广播，socket.emit代表私发
   socket.on("sendMessage", function(content) {
-    /* */
-    console.log("server sendMessage", content);
     socket.emit("getMessage", content);
   });
 });
@@ -24,4 +21,4 @@ app.use(ctx => {
 
 server.listen(3000);
 
-console.log("server running");
+console.log("Server listening on port 3000");
