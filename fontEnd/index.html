@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Websocket示例</title>
+    <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script>
+      class Websocket {
+        constructor() {
+          this.URL = 'http://localhost:3000';
+          this.socket;
+        }
+        // 连接到服务器
+        handleConnect(callback) {
+          this.socket = io.connect(this.URL, { reconnect: false, 'auto connect': false });
+          this.socket.on('connect', function() {
+            alert('服务器已连接');
+          });
+          this.socket.on('getMessage', function(data) {
+            // 服务端收到信息回调
+            callback(data);
+          });
+          this.socket.on('disconnect', function() {
+            alert('服务器已断开连接');
+          });
+        }
+        // 断开服务器
+        handleDisconnect() {
+          if (this.socket) {
+            this.socket.disconnect(true);
+            this.socket = null;
+          } else {
+            alert('还未连接到服务器！');
+          }
+        }
+        // 点击发送内容给服务器
+        handleSendMessage(content) {
+          if (this.socket) {
+            this.socket.emit('sendMessage', content);
+          } else {
+            alert('请先连接到服务器！');
+          }
+        }
+      }
+      const websocket = new Websocket();
+
+      // 点击发送事件
+      const handleClick = () => {
+        const content = document.getElementById('txtarea').value;
+        websocket.handleSendMessage(content);
+      };
+
+      // 连接服务器
+      const handleConnect = () => {
+        // 发送成功回调
+        const callback = data => {
+          const response = document.getElementById('response');
+          response.value = data;
+        };
+        websocket.handleConnect(callback);
+      };
+    </script>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+      }
+      .main-title {
+        font-size: 18px;
+        margin-bottom: 10px;
+        font-style: italic;
+      }
+      .title {
+        font-size: 16px;
+        margin-bottom: 10px;
+      }
+      .button-container {
+        display: flex;
+        margin: 10px 0;
+      }
+      .func-btn {
+        margin-right: 10px;
+      }
+      textarea {
+        width: 400px;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="main-title">Websocket示例</div>
+      <div class="title">发送数据</div>
+      <textarea id="txtarea"></textarea>
+      <div class="button-container">
+        <button class="func-btn" onclick="handleConnect()">连接服务器</button>
+        <button class="func-btn" onclick="handleClick()">发送给服务器</button>
+        <button class="func-btn" onclick="websocket.handleDisconnect()">断开服务器</button>
+      </div>
+      <div class="title">返回数据</div>
+      <textarea id="response"></textarea>
+    </div>
+  </body>
+</html>
