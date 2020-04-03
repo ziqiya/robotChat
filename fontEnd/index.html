@@ -25,16 +25,16 @@
             });
             this.socket.on('disconnect', function() {
               alert('服务器已断开连接');
+              this.socket = null;
             });
           } catch (err) {
-            alert('服务器未启动');
+            alert('服务器未启动!');
           }
         }
         // 断开服务器
         handleDisconnect() {
           if (this.socket) {
             this.socket.disconnect(true);
-            this.socket = null;
           } else {
             alert('还未连接到服务器！');
           }
