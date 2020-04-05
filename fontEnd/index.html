@@ -6,18 +6,86 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Websocket示例</title>
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/moment.min.js"></script>
+    <link rel="stylesheet" href="./index.css" />
+
     <script>
+      // 消息类型映射
+      const MSG_TYPE = Object.freeze({
+        user: 1,
+        system: 2,
+      });
+      const BASE_URL = 'http://localhost:3000';
+      /**
+       * @功能描述: 聊天室类
+       * @参数:
+       * @返回值:
+       */
+      class ChatRoom {
+        constructor() {
+          this.chatData = [];
+          this.userName = '';
+          this.userContent = '';
+        }
+        fetchData = () =>
+          $.ajax({
+            url: `${BASE_URL}/chatData`,
+            type: 'GET',
+            // 若使用jsonp方法跨域
+            // dataType: 'jsonp',
+            async: false,
+            success: function(result) {
+              const chatData = result.data;
+              this.chatData = chatData;
+              const domArr =
+                chatData && chatData.length > 0
+                  ? chatData.map(item => {
+                      const { time, userName, content, msgType } = item;
+                      const timeString = moment(time).format('YYYY-MM-DD HH:mm:ss');
+                      return msgType === MSG_TYPE.user
+                        ? `<div class="chat-row">
+            <div class="release-time">${timeString}</div>
+            <div class="user-line">
+              <div class="name-wrap"><span class="user-name">${userName}</span>说:</div>
+              <div class="chat-word">${content}</div>
+            </div>
+          </div>`
+                        : `<div class="system-message"><span class="user-name">${userName}</span>${content}</div>`;
+                    })
+                  : [];
+              const domString = domArr.join('');
+              $('.chat-row,.system-message').remove();
+              $('.chat-list').append(domString);
+            },
+          });
+      }
+      /**
+       * @功能描述: Websocket类
+       * @参数:
+       * @返回值:
+       */
       class Websocket {
         constructor() {
-          this.URL = 'http://localhost:3000';
           this.socket;
         }
         // 连接到服务器
         handleConnect(callback) {
           try {
-            this.socket = io.connect(this.URL, { reconnect: false, 'auto connect': false });
+            const _this = this;
+            this.socket = io.connect(BASE_URL);
             this.socket.on('connect', function() {
-              alert('服务器连接成功!');
+              const userName = localStorage.getItem('chatRoom-userName');
+              const userStatus = localStorage.getItem('chatRoom-userStatus');
+              if (userName && userStatus !== 'online') {
+                chatRoom.userName = userName;
+                _this.handleSendSystemMessage(userName, 'online');
+                $('#name-input').val(userName);
+              }
+              const scrollHeight = $('.chat-list').prop('scrollHeight');
+              // 获取聊天室数据
+              chatRoom.fetchData();
+              $('.chat-list').scrollTop(scrollHeight, 1000);
             });
             this.socket.on('getMessage', function(data) {
               // 服务端收到信息回调
@@ -25,9 +93,12 @@
             });
             this.socket.on('disconnect', function() {
               alert('服务器已断开连接');
+              this.userName = '';
+              this.userContent = '';
               this.socket = null;
             });
           } catch (err) {
+            console.log('err: ', err);
             alert('服务器未启动!');
           }
         }
@@ -47,64 +118,93 @@
             alert('请先连接到服务器！');
           }
         }
+        /**
+         * @功能描述: 发送系统消息
+         * @参数: @param userName:用户名 @param status:用户状态(online/offline)
+         * @返回值:
+         */
+        handleSendSystemMessage(userName, status) {
+          if (status === 'online') {
+            this.handleSendMessage({
+              userName,
+              userContent: '加入了聊天室',
+              msgType: MSG_TYPE.system,
+            });
+          } else {
+            this.handleSendMessage({
+              userName,
+              userContent: '离开了聊天室',
+              msgType: MSG_TYPE.system,
+            });
+          }
+          localStorage.setItem('chatRoom-userStatus', status);
+        }
       }
+
+      const chatRoom = new ChatRoom();
       const websocket = new Websocket();
 
-      // 点击发送事件
-      const handleClick = () => {
-        const content = document.getElementById('txtarea').value;
-        websocket.handleSendMessage(content);
-      };
-
       // 连接服务器
-      const handleConnect = () => {
+      const handleConnect = content => {
         // 发送成功回调
-        const callback = data => {
-          const response = document.getElementById('response');
-          response.value = data;
+        const callback = () => {
+          const scrollHeight = $('.chat-list').prop('scrollHeight');
+          // 获取聊天室数据
+          chatRoom.fetchData();
+          $('.chat-list').scrollTop(scrollHeight, 1000);
         };
         websocket.handleConnect(callback);
       };
+
+      $(document).ready(function() {
+        // 获取聊天室数据
+        chatRoom.fetchData();
+        // 连接至服务器
+        handleConnect();
+        $('#name-input').change(function() {
+          chatRoom.userName = $(this).val();
+          localStorage.setItem('chatRoom-userName', chatRoom.userName);
+          if ($(this).val() !== '') {
+            websocket.handleSendSystemMessage(chatRoom.userName, 'online');
+          }
+        });
+        $('#word-input').change(function() {
+          chatRoom.userContent = $(this).val();
+        });
+        $('#send-btn').click(function() {
+          if (chatRoom.userName === '') {
+            alert('请先输入昵称!');
+            return;
+          }
+          if (chatRoom.userContent.trim() === '') {
+            alert('发送内容不可为空!');
+            return;
+          }
+          websocket.handleSendMessage({
+            userName: chatRoom.userName,
+            userContent: chatRoom.userContent,
+          });
+          $('#word-input').val('');
+          chatRoom.userContent = '';
+        });
+      });
     </script>
-    <style>
-      .container {
-        display: flex;
-        flex-direction: column;
-      }
-      .main-title {
-        font-size: 18px;
-        margin-bottom: 10px;
-        font-style: italic;
-      }
-      .title {
-        font-size: 16px;
-        margin-bottom: 10px;
-      }
-      .button-container {
-        display: flex;
-        margin: 10px 0;
-      }
-      .func-btn {
-        margin-right: 10px;
-      }
-      textarea {
-        width: 400px;
-        height: 200px;
-      }
-    </style>
   </head>
   <body>
     <div class="container">
-      <div class="main-title">Websocket示例</div>
-      <div class="title">发送数据</div>
-      <textarea id="txtarea"></textarea>
-      <div class="button-container">
-        <button class="func-btn" onclick="handleConnect()">连接服务器</button>
-        <button class="func-btn" onclick="handleClick()">发送给服务器</button>
-        <button class="func-btn" onclick="websocket.handleDisconnect()">断开服务器</button>
+      <div class="chat-wrap">
+        <div class="chat-header">
+          聊天室
+        </div>
+        <div class="chat-list"></div>
+        <div class="send-bar">
+          <div class="name-bar">
+            <input id="name-input" placeholder="请输入昵称" />
+            <button id="send-btn">发送</button>
+          </div>
+          <textarea id="word-input" placeholder="请输入要说的话"></textarea>
+        </div>
       </div>
-      <div class="title">返回数据</div>
-      <textarea id="response"></textarea>
     </div>
   </body>
 </html>

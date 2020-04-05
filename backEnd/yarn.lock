@@ -52,6 +52,11 @@ better-assert@~1.0.0:
   dependencies:
     callsite "1.0.0"
 
+bignumber.js@9.0.0:
+  version "9.0.0"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/bignumber.js/-/bignumber.js-9.0.0.tgz#805880f84a329b5eac6e7cb6f8274b6d82bdf075"
+  integrity sha1-gFiA+Eoym16sbny2+CdLbYK98HU=
+
 blob@0.0.5:
   version "0.0.5"
   resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/blob/-/blob-0.0.5.tgz#d680eeef25f8cd91ad533f5b01eed48e64caf683"
@@ -122,19 +127,24 @@ cookies@~0.8.0:
     depd "~2.0.0"
     keygrip "~1.1.0"
 
+core-util-is@~1.0.0:
+  version "1.0.2"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
+  integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
+
+debug@^4.1.1, debug@~4.1.0:
+  version "4.1.1"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
+  integrity sha1-O3ImAlUQnGtYnO4FDx1RYTlmR5E=
+  dependencies:
+    ms "^2.1.1"
+
 debug@~3.1.0:
   version "3.1.0"
   resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   integrity sha1-W7WgZyYotkFJVmuhaBnmFRjGcmE=
   dependencies:
     ms "2.0.0"
-
-debug@~4.1.0:
-  version "4.1.1"
-  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/debug/-/debug-4.1.1.tgz#3b72260255109c6b589cee050f1d516139664791"
-  integrity sha1-O3ImAlUQnGtYnO4FDx1RYTlmR5E=
-  dependencies:
-    ms "^2.1.1"
 
 deep-equal@~1.0.1:
   version "1.0.1"
@@ -246,7 +256,7 @@ http-assert@^1.3.0:
     deep-equal "~1.0.1"
     http-errors "~1.7.2"
 
-http-errors@^1.6.3, http-errors@~1.7.2:
+http-errors@^1.6.3, http-errors@^1.7.3, http-errors@~1.7.2:
   version "1.7.3"
   resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/http-errors/-/http-errors-1.7.3.tgz#6c619e4f9c60308c38519498c14fbb10aacebb06"
   integrity sha1-bGGeT5xgMIw4UZSYwU+7EKrOuwY=
@@ -267,7 +277,7 @@ indexof@0.0.1:
   resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/indexof/-/indexof-0.0.1.tgz#82dc336d232b9062179d05ab3293a66059fd435d"
   integrity sha1-gtwzbSMrkGIXnQWrMpOmYFn9Q10=
 
-inherits@2.0.4:
+inherits@2.0.4, inherits@~2.0.3:
   version "2.0.4"
   resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha1-D6LGT5MpF8NDOg3tVTY6rjdBa3w=
@@ -277,10 +287,20 @@ is-generator-function@^1.0.7:
   resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/is-generator-function/-/is-generator-function-1.0.7.tgz#d2132e529bb0000a7f80794d4bdf5cd5e5813522"
   integrity sha1-0hMuUpuwAAp/gHlNS99c1eWBNSI=
 
+isarray@0.0.1:
+  version "0.0.1"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/isarray/-/isarray-0.0.1.tgz#8a18acfca9a8f4177e09abfc6038939b05d1eedf"
+  integrity sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8=
+
 isarray@2.0.1:
   version "2.0.1"
   resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/isarray/-/isarray-2.0.1.tgz#a37d94ed9cda2d59865c9f76fe596ee1f338741e"
   integrity sha1-o32U7ZzaLVmGXJ92/llu4fM4dB4=
+
+isarray@~1.0.0:
+  version "1.0.0"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/isarray/-/isarray-1.0.0.tgz#bb935d48582cba168c06834957a54a3e07124f11"
+  integrity sha1-u5NdSFgsuhaMBoNJV6VKPgcSTxE=
 
 keygrip@~1.1.0:
   version "1.1.0"
@@ -308,6 +328,23 @@ koa-convert@^1.2.0:
   dependencies:
     co "^4.6.0"
     koa-compose "^3.0.0"
+
+koa-router@^8.0.8:
+  version "8.0.8"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/koa-router/-/koa-router-8.0.8.tgz#f0b70f90dae275db8c71a41e1efb625581fb3b5a"
+  integrity sha1-8LcPkNridduMcaQeHvtiVYH7O1o=
+  dependencies:
+    debug "^4.1.1"
+    http-errors "^1.7.3"
+    koa-compose "^4.1.0"
+    methods "^1.1.2"
+    path-to-regexp "1.x"
+    urijs "^1.19.2"
+
+koa2-cors@^2.0.6:
+  version "2.0.6"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/koa2-cors/-/koa2-cors-2.0.6.tgz#9ad23df3a0b9bb84530b46f5944f3fb576086554"
+  integrity sha1-mtI986C5u4RTC0b1lE8/tXYIZVQ=
 
 koa@^2.11.0:
   version "2.11.0"
@@ -344,6 +381,11 @@ media-typer@0.3.0:
   resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
 
+methods@^1.1.2:
+  version "1.1.2"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
+  integrity sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4=
+
 mime-db@1.43.0:
   version "1.43.0"
   resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/mime-db/-/mime-db-1.43.0.tgz#0a12e0502650e473d735535050e7c8f4eb4fae58"
@@ -356,6 +398,11 @@ mime-types@^2.1.18, mime-types@~2.1.24:
   dependencies:
     mime-db "1.43.0"
 
+moment@^2.24.0:
+  version "2.24.0"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  integrity sha1-DQVdU/UFKqZTyfbraLtdEr9cK1s=
+
 ms@2.0.0:
   version "2.0.0"
   resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -365,6 +412,16 @@ ms@^2.1.1:
   version "2.1.2"
   resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha1-0J0fNXtEP0kzgqjrPM0YOHKuYAk=
+
+mysql@^2.18.1:
+  version "2.18.1"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/mysql/-/mysql-2.18.1.tgz#2254143855c5a8c73825e4522baf2ea021766717"
+  integrity sha1-IlQUOFXFqMc4JeRSK68uoCF2Zxc=
+  dependencies:
+    bignumber.js "9.0.0"
+    readable-stream "2.3.7"
+    safe-buffer "5.1.2"
+    sqlstring "2.3.1"
 
 negotiator@0.6.2:
   version "0.6.2"
@@ -412,7 +469,32 @@ parseurl@^1.3.2:
   resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/parseurl/-/parseurl-1.3.3.tgz#9da19e7bee8d12dff0513ed5b76957793bc2e8d4"
   integrity sha1-naGee+6NEt/wUT7Vt2lXeTvC6NQ=
 
-safe-buffer@5.1.2:
+path-to-regexp@1.x:
+  version "1.8.0"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/path-to-regexp/-/path-to-regexp-1.8.0.tgz#887b3ba9d84393e87a0a0b9f4cb756198b53548a"
+  integrity sha1-iHs7qdhDk+h6CgufTLdWGYtTVIo=
+  dependencies:
+    isarray "0.0.1"
+
+process-nextick-args@~2.0.0:
+  version "2.0.1"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
+  integrity sha1-eCDZsWEgzFXKmud5JoCufbptf+I=
+
+readable-stream@2.3.7:
+  version "2.3.7"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/readable-stream/-/readable-stream-2.3.7.tgz#1eca1cf711aef814c04f62252a36a62f6cb23b57"
+  integrity sha1-Hsoc9xGu+BTAT2IlKjamL2yyO1c=
+  dependencies:
+    core-util-is "~1.0.0"
+    inherits "~2.0.3"
+    isarray "~1.0.0"
+    process-nextick-args "~2.0.0"
+    safe-buffer "~5.1.1"
+    string_decoder "~1.1.1"
+    util-deprecate "~1.0.1"
+
+safe-buffer@5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
   resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
   integrity sha1-mR7GnSluAxN0fVm9/St0XDX4go0=
@@ -477,10 +559,22 @@ socket.io@^2.3.0:
     socket.io-client "2.3.0"
     socket.io-parser "~3.4.0"
 
+sqlstring@2.3.1:
+  version "2.3.1"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/sqlstring/-/sqlstring-2.3.1.tgz#475393ff9e91479aea62dcaf0ca3d14983a7fb40"
+  integrity sha1-R1OT/56RR5rqYtyvDKPRSYOn+0A=
+
 "statuses@>= 1.5.0 < 2", statuses@^1.5.0:
   version "1.5.0"
   resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow=
+
+string_decoder@~1.1.1:
+  version "1.1.1"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
+  integrity sha1-nPFhG6YmhdcDCunkujQUnDrwP8g=
+  dependencies:
+    safe-buffer "~5.1.0"
 
 to-array@0.1.4:
   version "0.1.4"
@@ -505,12 +599,22 @@ type-is@^1.6.16:
     media-typer "0.3.0"
     mime-types "~2.1.24"
 
+urijs@^1.19.2:
+  version "1.19.2"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/urijs/-/urijs-1.19.2.tgz#f9be09f00c4c5134b7cb3cf475c1dd394526265a"
+  integrity sha1-+b4J8AxMUTS3yzz0dcHdOUUmJlo=
+
 utf-8-validate@^5.0.2:
   version "5.0.2"
   resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/utf-8-validate/-/utf-8-validate-5.0.2.tgz#63cfbccd85dc1f2b66cf7a1d0eebc08ed056bfb3"
   integrity sha1-Y8+8zYXcHytmz3odDuvAjtBWv7M=
   dependencies:
     node-gyp-build "~3.7.0"
+
+util-deprecate@~1.0.1:
+  version "1.0.2"
+  resolved "http://nexus.thundersdata.com:30012/repository/npm-repo-group/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
+  integrity sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=
 
 vary@^1.1.2:
   version "1.1.2"
