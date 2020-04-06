@@ -77,19 +77,17 @@
             this.socket.on('connect', function() {
               const userName = localStorage.getItem('chatRoom-userName');
               const userStatus = localStorage.getItem('chatRoom-userStatus');
+              chatRoom.userName = userName;
+              $('#name-input').val(userName);
               if (userName && userStatus !== 'online') {
-                chatRoom.userName = userName;
                 _this.handleSendSystemMessage(userName, 'online');
-                $('#name-input').val(userName);
               }
-              const scrollHeight = $('.chat-list').prop('scrollHeight');
-              // 获取聊天室数据
-              chatRoom.fetchData();
-              $('.chat-list').scrollTop(scrollHeight, 1000);
+              // 执行回调
+              callback();
             });
             this.socket.on('getMessage', function(data) {
               // 服务端收到信息回调
-              callback(data);
+              callback();
             });
             this.socket.on('disconnect', function() {
               alert('服务器已断开连接');
