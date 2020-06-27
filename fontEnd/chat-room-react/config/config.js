@@ -1,6 +1,6 @@
 import { defineConfig } from 'umi';
 export default defineConfig({
-  routes: [{ path: '/', component: '@/pages/index' }],
+  routes: [{ path: '/', component: '@/pages/homepage/index' }],
   targets: {
     chrome: 49,
     firefox: 45,
@@ -14,7 +14,8 @@ export default defineConfig({
   dynamicImport: {
     loading: '@/pages/components/Loading.tsx',
   },
-  title: '聊天室', // 项目自行补充
+  antd: {},
+  title: '聊天室',
   hardSource: false,
   autoprefixer: {
     browsers: ['> 1%', 'last 2 versions', 'not ie <= 10'],

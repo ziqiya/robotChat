@@ -20,7 +20,7 @@ class Mysql {
         }
         results.forEach(item => {
           const userName = pool.query(
-            `SELECT username from user WHERE id=${item.userid}`,
+            `SELECT username from user WHERE id=${item.userId}`,
             function(error, result) {
               try {
                 if (error) {
@@ -62,7 +62,7 @@ class Mysql {
                   throw error;
                 }
                 pool.query(
-                  `INSERT INTO chatWords (content,time,userid,msgType) VALUES ("${userContent}","${nowTime}",${result.insertId},${msgType})`,
+                  `INSERT INTO chatWords (content,time,userId,msgType) VALUES ("${userContent}","${nowTime}",${result.insertId},${msgType})`,
                   function(error, result) {
                     if (error) {
                       throw error;
@@ -74,7 +74,7 @@ class Mysql {
             );
           } else {
             pool.query(
-              `INSERT INTO chatWords (content,time,userid,msgType) VALUES ("${userContent}","${nowTime}",${results[0].id},${msgType})`,
+              `INSERT INTO chatWords (content,time,userId,msgType) VALUES ("${userContent}","${nowTime}",${results[0].id},${msgType})`,
               function(error, result) {
                 if (error) {
                   throw error;

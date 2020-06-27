@@ -8,6 +8,13 @@ var server = require("http").createServer(app.callback());
 
 const Router = require("koa-router");
 
+const request = require("request");
+
+var config = require("./config/default.js");
+
+const { robot, msgType } = config;
+
+const { ROBOT_URL, API_KEY, API_SECRET } = robot;
 // 跨域请求
 const cors = require("koa2-cors");
 
@@ -33,24 +40,13 @@ var io = require("socket.io")(server);
 io.on("connection", function(socket) {
   // io.emit代表广播，socket.emit代表私发
   socket.on("sendMessage", async function(content) {
-    const result = await mysql.addChatData(content);
+    await mysql.addChatData(content);
     io.emit("getMessage", content);
   });
 });
 
 router.get("/chatData", async (ctx, next) => {
   const result = await mysql.getChatData();
-  // jsonp后端方法
-  // ctx.body =
-  //   ctx.query.callback +
-  //   "(" +
-  //   JSON.stringify({
-  //     code: 20000,
-  //     data: result,
-  //     message: "请求成功",
-  //     success: true
-  //   }) +
-  //   ")";
   ctx.body = {
     code: 20000,
     data: result,

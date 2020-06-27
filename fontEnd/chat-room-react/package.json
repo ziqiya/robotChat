@@ -19,16 +19,26 @@
     ]
   },
   "devDependencies": {
-    "@umijs/preset-react": "^1"
+    "@types/classnames": "^2.2.10",
+    "@types/socket.io-client": "^1.4.33",
+    "@umijs/preset-react": "^1",
+    "typescript": "3.9.3"
   },
   "dependencies": {
+    "@ice/store": "1.3.0",
     "@umijs/test": "^3.0.18",
+    "ahooks": "^2.0.1",
     "antd": "^4.1.1",
+    "classnames": "^2.2.6",
     "lint-staged": "^10.0.7",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "react-dom": "^16.13.1",
+    "react-websocket": "^2.1.0",
+    "reconnecting-websocket": "^4.4.0",
+    "socket.io-client": "^2.3.0",
     "umi": "^3.0.18",
+    "use-immer": "^0.4.0",
     "yorkie": "^2.0.0"
   }
 }
