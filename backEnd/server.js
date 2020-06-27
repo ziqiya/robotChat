@@ -6,11 +6,15 @@ const mysql = require("./mysql");
 //创建http服务
 var server = require("http").createServer(app.callback());
 
+const request = require("request");
+
 const Router = require("koa-router");
 
 var config = require("./config/default.js");
 
-const { msgType } = config;
+const { robot, msgType } = config;
+
+const { ROBOT_NAME, ROBOT_URL, API_KEY, API_SECRET } = robot;
 
 // 跨域请求
 const cors = require("koa2-cors");
@@ -39,6 +43,26 @@ io.on("connection", function(socket) {
   socket.on("sendMessage", async function(content) {
     await mysql.addChatData(content);
     io.emit("getMessage", content);
+
+    // 若不为系统消息，机器人自动回复
+    if (content.msgType !== msgType.SYSTEM) {
+      request(
+        `${ROBOT_URL}?question=${encodeURI(
+          content.userContent
+        )}&api_key=${API_KEY}&api_secret=${API_SECRET}`,
+        async function(error, response, body) {
+          if (!error && response.statusCode == 200) {
+            const robotContent = {
+              userContent: body,
+              userName: ROBOT_NAME,
+              msgType: msgType.USER
+            };
+            await mysql.addChatData(robotContent);
+            io.emit("getMessage", robotContent);
+          }
+        }
+      );
+    }
   });
 });
 

@@ -15,7 +15,7 @@ export default defineConfig({
     loading: '@/pages/components/Loading.tsx',
   },
   antd: {},
-  title: '聊天室',
+  title: '智能聊天室',
   hardSource: false,
   autoprefixer: {
     browsers: ['> 1%', 'last 2 versions', 'not ie <= 10'],

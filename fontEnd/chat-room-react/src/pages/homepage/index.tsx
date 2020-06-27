@@ -139,7 +139,7 @@ const HomePage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.chatWrap}>
-        <div className={styles.chatHeader}>聊天室</div>
+        <div className={styles.chatHeader}>智能聊天室</div>
         <div ref={chatListRef} className={styles.chatList}>
           {chatData &&
             chatData.map((item: ChatDataProps) => renderChatItem(item))}
