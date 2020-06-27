@@ -8,13 +8,10 @@ var server = require("http").createServer(app.callback());
 
 const Router = require("koa-router");
 
-const request = require("request");
-
 var config = require("./config/default.js");
 
-const { robot, msgType } = config;
+const { msgType } = config;
 
-const { ROBOT_URL, API_KEY, API_SECRET } = robot;
 // 跨域请求
 const cors = require("koa2-cors");
 
