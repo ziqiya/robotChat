@@ -18,7 +18,7 @@ const INITIAL_CHAT_CONFIG = {
 };
 
 const HomePage = () => {
-  const [webSocket, setWebSocket] = useState();
+  const [webSocket, setWebSocket] = useState<Websocket>();
   const [chatConfig, setChatConfig] = useImmer(INITIAL_CHAT_CONFIG);
   const chatListRef = useRef<HTMLDivElement>(null);
   const { userName, userContent } = chatConfig;
@@ -107,7 +107,7 @@ const HomePage = () => {
     const oldUserName = localStorage.getItem('chatRoom-userName');
     const userName = e.target.value;
     if (userName !== '' && userName !== oldUserName) {
-      webSocket.handleSendSystemMessage({ userName, status: 'online' });
+      webSocket?.handleSendSystemMessage({ userName, status: 'online' });
       localStorage.setItem('chatRoom-userName', userName);
     }
   };
@@ -122,7 +122,7 @@ const HomePage = () => {
       alert('发送内容不可为空!');
       return;
     }
-    webSocket.handleSendMessage({
+    webSocket?.handleSendMessage({
       userName: userName,
       userContent: userContent,
     });

@@ -10,5 +10,5 @@ export interface ChatDataProps {
 export interface MsgContentProps {
   userName: string;
   userContent: string;
-  msgType: number;
+  msgType?: number;
 }
