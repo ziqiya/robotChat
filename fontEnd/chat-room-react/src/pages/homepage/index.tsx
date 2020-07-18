@@ -66,10 +66,10 @@ const HomePage = () => {
   const handleConnect = () => {
     let webSocketIo;
     // 发送成功/回调
-    const callback = () => {
-      const dom = chatListRef.current;
+    const callback = async () => {
       // 获取聊天室数据
-      fetchData();
+      await fetchData();
+      const dom = chatListRef.current;
       if (dom) {
         const scrollHeight = dom.scrollHeight;
         dom.scrollTop = scrollHeight;
@@ -130,6 +130,19 @@ const HomePage = () => {
       config.userContent = '';
     });
   };
+
+  useEffect(() => {
+    document.onkeydown = function(e: KeyboardEvent) {
+      // 兼容FF和IE和Opera
+      var theEvent = (window.event as KeyboardEvent) || e;
+      var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+      // 若按下回车键
+      if (code == 13) {
+        e.preventDefault();
+        handleSubmit();
+      }
+    };
+  }, [userName, userContent]);
 
   useEffect(() => {
     // 连接至服务器
