@@ -16,7 +16,7 @@
     "moment": "^2.24.0",
     "mysql": "^2.18.1",
     "request": "^2.88.2",
-    "socket.io": "^2.3.0",
+    "socket.io": "^2.5.0",
     "utf-8-validate": "^5.0.2"
   }
 }
