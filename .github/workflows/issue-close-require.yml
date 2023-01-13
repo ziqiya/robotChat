@@ -2,7 +2,7 @@ name: Issue Close Require
 
 on:
   schedule:
-    - cron:  '15 17 * * *'
+    - cron:  '20 17 * * *'
 
 permissions:
   contents: read
