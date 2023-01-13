@@ -30,3 +30,5 @@
 ## 说明
 
 本机器人使用的是茉莉机器人，可以自行百度添加机器人并获取 APIKey 和 ApiSecret。
+
+[![RuanXuSong's github stats](https://github-readme-stats.vercel.app/api?username=RuanXuSong)](https://github.com/RuanXuSong/github-readme-stats)
