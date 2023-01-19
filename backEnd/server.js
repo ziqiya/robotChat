@@ -24,7 +24,7 @@ const router = new Router();
 // 跨域配置
 app.use(
   cors({
-    origin: function (ctx) {
+    origin: function(ctx) {
       return '*'; // 允许来自所有域名请求
     },
     exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
@@ -38,22 +38,35 @@ app.use(
 //给http封装成io对象
 var io = require('socket.io')(server);
 // 建立链接
-io.on('connection', function (socket) {
+io.on('connection', function(socket) {
   // io.emit代表广播，socket.emit代表私发
-  socket.on('sendMessage', async function (content) {
+  socket.on('sendMessage', async function(content) {
     await mysql.addChatData(content);
     io.emit('getMessage', content);
 
     // 若不为系统消息，机器人自动回复
     if (content.msgType !== msgType.SYSTEM) {
       request(
-        `${ROBOT_URL}?question=${encodeURI(
-          content.userContent
-        )}&api_key=${API_KEY}&api_secret=${API_SECRET}`,
-        async function (error, response, body) {
+        {
+          url: ROBOT_URL,
+          method: 'POST',
+          json: true,
+          headers: {
+            'Api-Key': API_KEY,
+            'Api-Secret': API_SECRET,
+            'content-type': 'application/json;charset=UTF-8',
+          },
+          body: {
+            content: content.userContent,
+            type: 1,
+            from: content.userName,
+            fromName: content.userName,
+          },
+        },
+        async function(error, response, body) {
           if (!error && response.statusCode == 200) {
             const robotContent = {
-              userContent: body,
+              userContent: body.data[0].content,
               userName: ROBOT_NAME,
               msgType: msgType.USER,
             };
@@ -78,10 +91,10 @@ router.get('/chatData', async (ctx, next) => {
 
 app.use(router.routes());
 
-app.use((ctx) => {
+app.use(ctx => {
   ctx.response.body = '服务器运行中';
 });
 
-server.listen(3000, function () {
+server.listen(3000, function() {
   console.log('Server listening on port 3000');
 });
